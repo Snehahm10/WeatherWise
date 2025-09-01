@@ -1,20 +1,10 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import type { displayWeatherCondition as displayWeatherConditionType } from '@/ai/flows/display-weather-condition-with-ai';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WeatherIcon } from './weather-icon';
 import { Skeleton } from './ui/skeleton';
-
-// This is a workaround to get the type of a server action
-// because we can't import it directly in a client component.
-const displayWeatherCondition: typeof displayWeatherConditionType = 
-  (globalThis as any).displayWeatherCondition ||
-  (async () => {
-    const { displayWeatherCondition } = await import('@/ai/flows/display-weather-condition-with-ai');
-    (globalThis as any).displayWeatherCondition = displayWeatherCondition;
-    return displayWeatherCondition;
-  });
+import { getAIDescriptionForWeather } from '@/app/actions';
 
 interface WeatherData {
   temperature: number;
@@ -47,19 +37,19 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
   useEffect(() => {
     const fetchAIData = async () => {
       setLoading(true);
-      try {
-        const fn = typeof displayWeatherCondition === 'function' ? displayWeatherCondition : await displayWeatherCondition;
-        const result = await fn({
-          weatherCondition: data.condition,
-          timeOfDay: getTimeOfDay(),
-        });
-        setAiData(result);
-      } catch (error) {
-        console.error("AI data fetch failed:", error);
+      const result = await getAIDescriptionForWeather({
+        weatherCondition: data.condition,
+        timeOfDay: getTimeOfDay(),
+      });
+      
+      if (result.success) {
+        setAiData(result.data);
+      } else {
+        console.error("AI data fetch failed:", result.error);
+        // Fallback to basic data if AI fails
         setAiData({ description: data.condition, icon: data.condition });
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     };
 
     fetchAIData();
