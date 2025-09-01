@@ -9,6 +9,7 @@
  */
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { googleAI } from '@genkit-ai/googleai';
 
 const DisplayWeatherConditionInputSchema = z.object({
   weatherCondition: z.string().describe('The current weather condition (e.g., sunny, cloudy, rainy).'),
@@ -47,7 +48,7 @@ const displayWeatherConditionFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await ai.generate({
-      model: 'gemini-1.5-pro',
+      model: googleAI.model('gemini-1.5-pro'),
       prompt: {
         ...prompt,
         input,
