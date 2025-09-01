@@ -11,6 +11,8 @@ export const WeatherDataSchema = z.object({
   temperature: z.number().describe('The temperature in Celsius.'),
   humidity: z.number().describe('The humidity as a percentage.'),
   condition: z.string().describe('A brief description of the weather condition (e.g., "Sunny", "Cloudy").'),
+  city: z.string().describe('The name of the city.'),
+  country: z.string().describe('The country code of the city.'),
 });
 
 export const getWeatherTool = ai.defineTool(
@@ -49,6 +51,8 @@ export const getWeatherTool = ai.defineTool(
             temperature: Math.round(data.main.temp),
             humidity: data.main.humidity,
             condition: data.weather[0].main,
+            city: data.name,
+            country: data.sys.country,
         };
     } catch (error) {
         console.error("Error in getWeatherTool:", error);

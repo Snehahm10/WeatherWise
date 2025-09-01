@@ -12,11 +12,12 @@ interface WeatherData {
   temperature: number;
   humidity: number;
   condition: string;
+  city: string;
+  country: string;
 }
 
 export default function Home() {
   const [city, setCity] = useState('');
-  const [submittedCity, setSubmittedCity] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -34,7 +35,6 @@ export default function Home() {
     
     setIsLoading(true);
     setWeatherData(null);
-    setSubmittedCity(city);
 
     try {
       const response = await fetch('/api/weather', {
@@ -96,7 +96,7 @@ export default function Home() {
             </div>
         )}
 
-        {weatherData && !isLoading && <WeatherDisplay data={weatherData} city={submittedCity} />}
+        {weatherData && !isLoading && <WeatherDisplay data={weatherData} />}
       </div>
     </main>
   );

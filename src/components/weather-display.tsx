@@ -9,11 +9,12 @@ interface WeatherData {
   temperature: number;
   humidity: number;
   condition: string;
+  city: string;
+  country: string;
 }
 
 interface WeatherDisplayProps {
   data: WeatherData;
-  city: string;
 }
 
 interface AIData {
@@ -29,7 +30,7 @@ const getTimeOfDay = (): 'morning' | 'afternoon' | 'evening' | 'night' => {
   return 'night';
 };
 
-export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
+export function WeatherDisplay({ data }: WeatherDisplayProps) {
   const [aiData, setAiData] = useState<AIData | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(true);
 
@@ -72,7 +73,7 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
   return (
     <Card className="mt-6 w-full max-w-md animate-in fade-in-0 duration-500">
       <CardHeader className="pb-2">
-        <CardTitle className="text-3xl font-bold capitalize font-headline">{city}</CardTitle>
+        <CardTitle className="text-3xl font-bold capitalize font-headline">{`${data.city}, ${data.country}`}</CardTitle>
         {isAiLoading ? (
           <Skeleton className="h-5 w-40 mt-1" />
         ) : (
