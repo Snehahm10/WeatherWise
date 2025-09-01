@@ -90,8 +90,8 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
             <WeatherIcon iconName={aiData?.icon || data.condition} className="h-24 w-24 text-accent" />
           )}
           <div className="flex items-start">
-            <span className="text-7xl font-bold text-foreground">{data.temperature}</span>
-            <span className="mt-2 text-xl font-medium text-muted-foreground">&deg;C</span>
+            <span className="text-6xl font-bold text-foreground">{data.temperature}</span>
+            <span className="mt-1 text-lg font-medium text-muted-foreground">&deg;C</span>
           </div>
         </div>
         <div className="text-center bg-muted/50 p-3 rounded-lg w-40">
