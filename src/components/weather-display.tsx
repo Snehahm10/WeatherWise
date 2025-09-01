@@ -43,20 +43,28 @@ const formatTime = (timestamp: number) => {
 const getCardClasses = (condition: string | null) => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
+  // Sunny → Light orange & yellow
   if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'from-purple-200 via-purple-300 to-indigo-300 text-purple-900';
+    return 'from-orange-200 via-yellow-200 to-yellow-300 text-yellow-900';
   }
+
+  // Rainy → Lavender purple
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'from-blue-200 via-blue-300 to-blue-500 text-blue-900';
-  }
-  if (lowerCaseCondition.includes('snow')) {
     return 'from-purple-200 via-purple-300 to-purple-400 text-purple-900';
   }
-  if (lowerCaseCondition.includes('cloud')) {
-    return 'from-gray-400 via-gray-500 to-gray-600 text-gray-900';
+
+  // Winter (snow/cold) → Light blue
+  if (lowerCaseCondition.includes('snow')) {
+    return 'from-blue-200 via-blue-300 to-blue-400 text-blue-900';
   }
-  
-  return 'from-purple-200 via-purple-300 to-indigo-300 text-purple-900';
+
+  // Clouds → keep neutral (soft gray/blue)
+  if (lowerCaseCondition.includes('cloud')) {
+    return 'from-slate-200 via-slate-300 to-slate-400 text-slate-900';
+  }
+
+  // Default → Sunny style (fallback)
+  return 'from-orange-200 via-yellow-200 to-yellow-300 text-yellow-900';
 };
 
 
