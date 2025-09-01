@@ -1,20 +1,20 @@
 'use server';
 /**
  * @fileOverview A weather tool that fetches weather data from a third-party API.
- * This file defines a Genkit tool for fetching weather data and a flow that uses it.
+ * This file defines a Genkit tool for fetching weather data.
  *
- * - getWeather - A function that fetches weather for a given city.
+ * - getWeatherTool - A Genkit tool for fetching weather data.
  */
 import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 
-const WeatherDataSchema = z.object({
+export const WeatherDataSchema = z.object({
   temperature: z.number().describe('The temperature in Celsius.'),
   humidity: z.number().describe('The humidity as a percentage.'),
   condition: z.string().describe('A brief description of the weather condition (e.g., "Sunny", "Cloudy").'),
 });
 
-const getWeatherTool = ai.defineTool(
+export const getWeatherTool = ai.defineTool(
   {
     name: 'getWeather',
     description: 'Get the current weather for a specified city.',
@@ -57,20 +57,5 @@ const getWeatherTool = ai.defineTool(
         }
         throw new Error(`An error occurred while fetching weather for ${input.city}`);
     }
-  }
-);
-
-export const getWeather = ai.defineFlow(
-  {
-    name: 'getWeatherFlow',
-    inputSchema: z.string(),
-    outputSchema: WeatherDataSchema,
-    config: {
-        timeout: 30000,
-    }
-  },
-  async (city) => {
-    const { output } = await ai.runTool(getWeatherTool, { city });
-    return output!;
   }
 );

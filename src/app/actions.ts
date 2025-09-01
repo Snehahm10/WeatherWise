@@ -1,6 +1,6 @@
 'use server';
 
-import { getWeather } from '@/ai/flows/get-weather';
+import { getWeatherFlow } from '@/ai/flows/get-weather-flow';
 import { displayWeatherCondition } from '@/ai/flows/display-weather-condition-with-ai';
 import type { DisplayWeatherConditionInput, DisplayWeatherConditionOutput } from '@/ai/flows/display-weather-condition-with-ai';
 
@@ -10,7 +10,7 @@ export async function getWeatherForCity(
   { success: true; data: any } | { success: false; error: string }
 > {
   try {
-    const weatherData = await getWeather(city);
+    const weatherData = await getWeatherFlow(city);
     return {
       success: true,
       data: weatherData,
