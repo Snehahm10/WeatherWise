@@ -29,29 +29,29 @@ interface Suggestion {
 }
 
 const getBackgroundClass = (condition: string | null) => {
-  if (!condition) return 'bg-gray-800'; // Default background
+  if (!condition) return 'bg-gradient-to-br from-gray-900 to-blue-900'; // Default background
 
   const lowerCaseCondition = condition.toLowerCase();
 
   if (lowerCaseCondition.includes('clear')) {
-    return 'bg-gradient-to-br from-blue-400 to-yellow-300';
+    return 'bg-gradient-to-br from-blue-800 to-cyan-400';
   }
   if (lowerCaseCondition.includes('cloud')) {
-    return 'bg-gradient-to-br from-gray-500 to-blue-400';
+    return 'bg-gradient-to-br from-gray-700 to-blue-800';
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'bg-gradient-to-br from-blue-800 to-gray-600';
+    return 'bg-gradient-to-br from-blue-900 to-gray-800';
   }
   if (lowerCaseCondition.includes('snow')) {
-    return 'bg-gradient-to-br from-blue-300 to-purple-400';
+    return 'bg-gradient-to-br from-blue-700 to-cyan-500';
   }
   if (lowerCaseCondition.includes('thunderstorm')) {
-    return 'bg-gradient-to-br from-gray-800 to-purple-900';
+    return 'bg-gradient-to-br from-gray-900 to-purple-900';
   }
   if (lowerCaseCondition.includes('mist') || lowerCaseCondition.includes('fog') || lowerCaseCondition.includes('haze')) {
-    return 'bg-gradient-to-br from-gray-400 to-gray-600';
+    return 'bg-gradient-to-br from-gray-600 to-blue-700';
   }
-  return 'bg-gradient-to-br from-gray-700 to-gray-900';
+  return 'bg-gradient-to-br from-gray-900 to-blue-900';
 };
 
 export default function Home() {
