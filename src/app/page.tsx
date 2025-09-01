@@ -16,9 +16,9 @@ export default function Home() {
       </div>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
         {/* Text Content */}
-        <div className="flex flex-col items-center lg:items-start max-w-xl">
-          <h1 className="text-4xl lg:text-6xl font-bold tracking-tighter mb-4">
-            The only weather app you need
+        <div className="flex flex-col items-center lg:items-start max-w-xl z-10">
+           <h1 className="text-4xl lg:text-6xl font-bold tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
+            Top Weather & Forecasting
           </h1>
           <p className="text-lg lg:text-xl text-foreground/80 mb-8">
             Get real-time weather updates, a 5-day forecast, and detailed insights for any city around the world. All in one simple, beautiful interface.
@@ -39,6 +39,7 @@ export default function Home() {
                 className="object-cover rounded-2xl shadow-2xl border-4 border-white/20 transform-gpu transition-transform hover:scale-105"
                 data-ai-hint="weather app interface"
             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
         </div>
       </div>
     </main>
