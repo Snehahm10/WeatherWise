@@ -62,7 +62,9 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
       }
     };
   
-    fetchAIData();
+    if (data.condition) {
+      fetchAIData();
+    }
   }, [data]);
 
   return (

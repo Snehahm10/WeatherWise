@@ -6,7 +6,6 @@
  * - DisplayWeatherConditionInput - The input type for the displayWeatherCondition function.
  * - DisplayWeatherConditionOutput - The return type for the displayWeatherCondition function.
  */
-'use server';
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
