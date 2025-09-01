@@ -19,10 +19,10 @@ export default function Home() {
             <Logo />
 
             <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
-              Top Weather & Forecasting
+              Global Weather at Your Fingertips
             </h1>
             <p className="text-lg lg:text-xl text-foreground/80 my-8">
-              Get real-time weather updates, a 5-day forecast, and detailed insights for any city around the world. All in one simple, beautiful interface.
+              Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
             </p>
             <Link href="/today">
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full text-lg px-8 py-6 group">
