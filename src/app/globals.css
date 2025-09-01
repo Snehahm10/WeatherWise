@@ -81,6 +81,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to bottom, #87CEFA, #ADD8E6);
+    background-image: linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5));
   }
 }
