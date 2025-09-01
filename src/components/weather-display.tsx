@@ -35,7 +35,11 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
   const [isAiLoading, setIsAiLoading] = useState(true);
 
   useEffect(() => {
-    if (!data.condition) return;
+    if (!data.condition) {
+      setAiData({ description: 'Weather data unavailable', icon: 'cloud' });
+      setIsAiLoading(false);
+      return;
+    };
   
     const fetchAIData = async () => {
       setIsAiLoading(true);
@@ -55,12 +59,10 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
           setAiData(result.data);
         } else {
           console.error("AI data fetch failed:", result.error);
-          // Fallback to non-AI data if the call fails
           setAiData({ description: data.condition, icon: data.condition });
         }
       } catch (err) {
         console.error("Unexpected error:", err);
-        // Fallback to non-AI data on network error
         setAiData({ description: data.condition, icon: data.condition });
       } finally {
         setIsAiLoading(false);

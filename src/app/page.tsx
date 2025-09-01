@@ -24,7 +24,7 @@ interface Suggestion {
 }
 
 export default function Home() {
-  const [city, setCity] = useState('');
+  const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -45,7 +45,7 @@ export default function Home() {
     setWeatherData(null);
     setSuggestions([]);
     setShowSuggestions(false);
-    setCity(selectedCity);
+    setCityInput(selectedCity);
 
     try {
       const response = await fetch('/api/weather', {
@@ -63,6 +63,7 @@ export default function Home() {
           title: 'Error',
           description: result.error,
         });
+        setWeatherData(null);
       }
     } catch (error) {
       toast({
@@ -70,44 +71,51 @@ export default function Home() {
         title: 'Error',
         description: 'An unexpected error occurred.',
       });
+       setWeatherData(null);
     }
     setIsLoading(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleFetchWeather(city);
+    handleFetchWeather(cityInput);
   };
   
   const fetchSuggestions = useCallback(async (query: string) => {
     if (query.length < 3) {
       setSuggestions([]);
+      setShowSuggestions(false);
       return;
     }
 
     try {
       const response = await fetch(`/api/suggestions?q=${query}`);
       const result = await response.json();
-      if (result.success) {
+      if (result.success && result.data.length > 0) {
         setSuggestions(result.data);
         setShowSuggestions(true);
       } else {
         setSuggestions([]);
+        setShowSuggestions(false);
       }
     } catch (error) {
       setSuggestions([]);
+      setShowSuggestions(false);
     }
   }, []);
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      if (city) {
-        fetchSuggestions(city);
+      if (cityInput) {
+        fetchSuggestions(cityInput);
+      } else {
+        setSuggestions([]);
+        setShowSuggestions(false);
       }
     }, 300);
 
     return () => clearTimeout(debounceTimer);
-  }, [city, fetchSuggestions]);
+  }, [cityInput, fetchSuggestions]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8">
@@ -126,10 +134,10 @@ export default function Home() {
           <Input 
             type="text"
             placeholder="E.g., Davangere, London, Tokyo"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            onFocus={() => city.length > 2 && setShowSuggestions(true)}
-            onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
+            value={cityInput}
+            onChange={(e) => setCityInput(e.target.value)}
+            onFocus={() => cityInput.length > 2 && fetchSuggestions(cityInput)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             className="flex-1"
             autoComplete="off"
           />
