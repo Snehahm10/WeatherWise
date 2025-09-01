@@ -33,22 +33,22 @@ const getBackgroundClass = (condition: string | null) => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
   if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'bg-gradient-to-br from-orange-200 via-orange-300 to-orange-400';
+    return 'bg-gradient-to-br from-blue-400 to-cyan-300';
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'bg-gradient-to-br from-blue-200 via-blue-300 to-blue-500';
+    return 'bg-gradient-to-br from-blue-700 to-gray-600';
   }
   if (lowerCaseCondition.includes('snow')) {
-    return 'bg-gradient-to-br from-purple-200 via-purple-300 to-purple-400';
+    return 'bg-gradient-to-br from-indigo-400 to-purple-600';
   }
   if (lowerCaseCondition.includes('cloud')) {
-    return 'bg-gradient-to-br from-gray-400 to-gray-600';
+    return 'bg-gradient-to-br from-gray-600 to-gray-800';
   }
   if (lowerCaseCondition.includes('storm') || lowerCaseCondition.includes('thunder')) {
-    return 'bg-gradient-to-br from-gray-700 to-gray-900';
+    return 'bg-gradient-to-br from-gray-800 to-gray-900';
   }
   
-  return 'bg-gradient-to-br from-gray-500 to-gray-700'; // Default
+  return 'bg-gradient-to-br from-gray-700 to-gray-900';
 };
 
 

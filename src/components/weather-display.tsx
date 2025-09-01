@@ -1,9 +1,11 @@
+
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { WeatherIcon } from './weather-icon';
 import { Skeleton } from './ui/skeleton';
 import { Sunrise, Sunset, Wind, Thermometer } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface WeatherData {
   temperature: number;
@@ -38,9 +40,31 @@ const formatTime = (timestamp: number) => {
   return new Date(timestamp * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+const getCardClasses = (condition: string | null) => {
+  const lowerCaseCondition = condition?.toLowerCase() || '';
+
+  if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
+    return 'from-orange-400/80 to-orange-600/80 text-orange-50';
+  }
+  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
+    return 'from-blue-400/80 to-blue-600/80 text-blue-50';
+  }
+  if (lowerCaseCondition.includes('snow')) {
+    return 'from-purple-400/80 to-purple-600/80 text-purple-50';
+  }
+  if (lowerCaseCondition.includes('cloud')) {
+    return 'from-gray-500/80 to-gray-700/80 text-gray-50';
+  }
+  
+  return 'bg-black/10 text-white'; // Default
+};
+
+
 export function WeatherDisplay({ data }: WeatherDisplayProps) {
   const [aiData, setAiData] = useState<AIData | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(true);
+
+  const cardClasses = useMemo(() => getCardClasses(data.condition), [data.condition]);
 
   useEffect(() => {
     if (!data.condition) {
@@ -81,7 +105,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
   }, [data.condition]);
 
   return (
-    <div className="mt-6 w-full max-w-md animate-in fade-in-0 duration-500 bg-black/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl text-white">
+    <div className={cn("mt-6 w-full max-w-md animate-in fade-in-0 duration-500 bg-gradient-to-br backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl", cardClasses)}>
       <div className="p-6 md:p-8 flex flex-col space-y-6">
         {/* Header */}
         <div className="text-center">
@@ -89,7 +113,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
             {isAiLoading ? (
                 <Skeleton className="h-5 w-48 mt-2 mx-auto bg-white/20" />
             ) : (
-                <p className="text-lg text-white/80">{aiData?.description}</p>
+                <p className="text-lg opacity-80">{aiData?.description}</p>
             )}
         </div>
         
@@ -109,30 +133,30 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         {/* Extra Details Grid */}
         <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/20 text-left">
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
-            <Thermometer className="h-6 w-6 text-white/80" />
+            <Thermometer className="h-6 w-6 opacity-80" />
             <div>
-              <p className="text-sm text-white/80">Feels Like</p>
+              <p className="text-sm opacity-80">Feels Like</p>
               <p className="text-xl font-semibold">{data.feelsLike}&deg;C</p>
             </div>
           </div>
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
-            <Wind className="h-6 w-6 text-white/80" />
+            <Wind className="h-6 w-6 opacity-80" />
             <div>
-              <p className="text-sm text-white/80">Wind</p>
+              <p className="text-sm opacity-80">Wind</p>
               <p className="text-xl font-semibold">{data.windSpeed} m/s</p>
             </div>
           </div>
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
-            <Sunrise className="h-6 w-6 text-white/80" />
+            <Sunrise className="h-6 w-6 opacity-80" />
             <div>
-              <p className="text-sm text-white/80">Sunrise</p>
+              <p className="text-sm opacity-80">Sunrise</p>
               <p className="text-xl font-semibold">{formatTime(data.sunrise)}</p>
             </div>
           </div>
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
-            <Sunset className="h-6 w-6 text-white/80" />
+            <Sunset className="h-6 w-6 opacity-80" />
             <div>
-              <p className="text-sm text-white/80">Sunset</p>
+              <p className="text-sm opacity-80">Sunset</p>
               <p className="text-xl font-semibold">{formatTime(data.sunset)}</p>
             </div>
           </div>
