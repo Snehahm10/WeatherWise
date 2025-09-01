@@ -11,12 +11,13 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full flex-col p-4 sm:p-8 bg-gradient-to-br from-[#0c1445] via-[#1a2e68] to-[#2c3e50] text-white">
-      <Logo />
-      <div className="flex flex-col items-center justify-center h-full">
+      <div className="flex flex-col items-center justify-center h-full text-center">
         <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
           {/* Text Content */}
           <div className="flex flex-col items-center lg:items-start max-w-xl z-10">
             
+            <Logo />
+
             <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
               Top Weather & Forecasting
             </h1>
