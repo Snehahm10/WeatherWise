@@ -11,8 +11,8 @@ export default function Home() {
     <main 
       className="relative min-h-screen w-full p-4 sm:p-8 text-foreground"
     >
-      {/* Top Right Content */}
-      <div className="absolute top-4 right-4 sm:top-8 sm:right-8 text-right max-w-xl z-10">
+      {/* Top Left Content */}
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 text-left max-w-xl z-10">
         <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-slate-100 drop-shadow-md font-headline">
           Global Weather at Your Fingertips
         </h1>
