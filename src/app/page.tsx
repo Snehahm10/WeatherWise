@@ -11,7 +11,7 @@ export default function Home() {
     <main 
       className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 text-center"
       style={{
-        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.9), rgba(173, 216, 230, 0.9)), url('https://picsum.photos/seed/nature-calm/1200/800')",
+        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.9), rgba(173, 216, 230, 0.9)), url('https://picsum.photos/seed/sky/1200/800')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
