@@ -1,4 +1,3 @@
-'use server';
 /**
  * @fileOverview A weather condition display AI agent that picks the appropriate
  * text and icon based on the current time of day.

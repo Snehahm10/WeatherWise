@@ -1,5 +1,3 @@
-'use server';
-
 /**
  * @fileOverview A weather flow that fetches weather data for a given city.
  *
