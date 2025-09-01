@@ -20,10 +20,10 @@ export default function Home() {
           {/* Text Content */}
           <div className="flex flex-col items-center max-w-xl z-10">
 
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-foreground font-headline">
+            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-white font-headline">
               Global Weather at Your Fingertips
             </h1>
-            <p className="text-lg lg:text-xl text-foreground/90 my-8">
+            <p className="text-lg lg:text-xl text-white/90 my-8">
               Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
             </p>
             <Link href="/today">
