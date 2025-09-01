@@ -10,18 +10,24 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: false, error: "City is required" }, { status: 400 });
     }
 
+    // The raw weather data from the tool
     const weatherData = await getWeatherTool.run({ city });
+
+    // Normalize the data shape to what the frontend component expects
+    const normalizedData = {
+      temperature: weatherData.temperature,
+      humidity: weatherData.humidity,
+      condition: weatherData.condition,
+    };
+
     return NextResponse.json({
       success: true,
-      data: weatherData,
+      data: normalizedData,
     });
   } catch (error) {
     console.error(error);
-    // This is a workaround to get the city name for the error message
-    // as the original request object is already consumed.
     const city = (await req.clone().json()).city || 'the specified city';
     if (error instanceof Error) {
-        // Error from OpenWeather API for "city not found" can be identified.
         if (error.message.includes('404') || error.message.toLowerCase().includes('city not found')) {
             return NextResponse.json({
                 success: false,
