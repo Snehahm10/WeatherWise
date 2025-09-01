@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { WeatherIcon } from './weather-icon';
 import { Skeleton } from './ui/skeleton';
-import { getAIDescriptionForWeather } from '@/app/actions';
 
 interface WeatherData {
   temperature: number;
@@ -37,21 +36,32 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
   useEffect(() => {
     const fetchAIData = async () => {
       setLoading(true);
-      const result = await getAIDescriptionForWeather({
-        weatherCondition: data.condition,
-        timeOfDay: getTimeOfDay(),
-      });
-      
-      if (result.success) {
-        setAiData(result.data);
-      } else {
-        console.error("AI data fetch failed:", result.error);
-        // Fallback to basic data if AI fails
+      try {
+        const response = await fetch("/api/ai-weather", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            weatherCondition: data.condition,
+            timeOfDay: getTimeOfDay(),
+          }),
+        });
+  
+        const result = await response.json();
+  
+        if (result.success) {
+          setAiData(result.data);
+        } else {
+          console.error("AI data fetch failed:", result.error);
+          setAiData({ description: data.condition, icon: data.condition });
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
         setAiData({ description: data.condition, icon: data.condition });
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-
+  
     fetchAIData();
   }, [data]);
 
