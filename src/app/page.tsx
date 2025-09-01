@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { WeatherDisplay } from '@/components/weather-display';
+import { ForecastDisplay, DailyForecast } from '@/components/forecast-display';
 import { Loader2, Search } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
@@ -32,6 +33,7 @@ interface Suggestion {
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [forecastData, setForecastData] = useState<DailyForecast[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -49,28 +51,48 @@ export default function Home() {
     
     setIsLoading(true);
     setWeatherData(null);
+    setForecastData(null);
     setSuggestions([]);
     setShowSuggestions(false);
     setCityInput(selectedCity);
 
     try {
-      const response = await fetch('/api/weather', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ city: selectedCity }),
-      });
-      const result = await response.json();
+      // Fetch current weather and forecast in parallel
+      const [weatherResponse, forecastResponse] = await Promise.all([
+        fetch('/api/weather', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ city: selectedCity }),
+        }),
+        fetch('/api/forecast', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ city: selectedCity }),
+        })
+      ]);
+      
+      const weatherResult = await weatherResponse.json();
+      const forecastResult = await forecastResponse.json();
 
-      if (result.success) {
-        setWeatherData(result.data);
+      if (weatherResult.success) {
+        setWeatherData(weatherResult.data);
       } else {
         toast({
           variant: 'destructive',
           title: 'Error',
-          description: result.error,
+          description: weatherResult.error,
         });
         setWeatherData(null);
       }
+
+      if (forecastResult.success) {
+        setForecastData(forecastResult.data);
+      } else {
+        // You might want to show a non-blocking toast for forecast errors
+        console.warn("Could not fetch forecast:", forecastResult.error);
+        setForecastData(null);
+      }
+
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -78,6 +100,7 @@ export default function Home() {
         description: 'An unexpected error occurred.',
       });
        setWeatherData(null);
+       setForecastData(null);
     }
     setIsLoading(false);
   };
@@ -124,24 +147,19 @@ export default function Home() {
   }, [cityInput, fetchSuggestions, weatherData?.city]);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-br from-[#2E2257] via-[#241B49] to-[#392E66]">
-      <div className="w-full max-w-md space-y-8 text-center">
-        {!weatherData && !isLoading && (
-           <div className="flex flex-col items-center justify-center gap-4 animate-in fade-in-0 duration-500">
-             <div className="w-40 h-40">
-                <img src="https://firebasestorage.googleapis.com/v0/b/stedi-web-devex.appspot.com/o/1d18ea67-a2e6-4927-b50e-a50352778553.png?alt=media&token=59a8dfcb-50e5-4723-a551-789a42426462" alt="Weather illustration" />
-             </div>
-             <h1 className="text-5xl font-bold tracking-tighter text-white">
-               Weather
-               <span className="ml-2 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                 Forecasts
-               </span>
-             </h1>
-             <p className="text-lg text-foreground/80">
-                Get the latest weather updates for your city.
-             </p>
-           </div>
-        )}
+    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8 bg-gradient-to-br from-[#2E2257] via-[#241B49] to-[#392E66]">
+      <div className="w-full max-w-md space-y-8">
+        <div className="flex flex-col items-center justify-center gap-4 text-center animate-in fade-in-0 duration-500">
+          <h1 className="text-5xl font-bold tracking-tighter text-white">
+            Weather
+            <span className="ml-2 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+              Forecasts
+            </span>
+          </h1>
+          <p className="text-lg text-foreground/80">
+              Get the latest weather updates for your city.
+          </p>
+        </div>
 
         <div className='space-y-6'>
           <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
@@ -188,10 +206,15 @@ export default function Home() {
                       <Skeleton className="h-24 w-full rounded-lg bg-card" />
                       <Skeleton className="h-24 w-full rounded-lg bg-card" />
                    </div>
+                   <Skeleton className="h-48 w-full rounded-lg bg-card" />
               </div>
           )}
+          
+          <div className="space-y-6">
+            {weatherData && !isLoading && <WeatherDisplay data={weatherData} />}
+            {forecastData && !isLoading && <ForecastDisplay data={forecastData} />}
+          </div>
 
-          {weatherData && !isLoading && <WeatherDisplay data={weatherData} />}
         </div>
       </div>
     </main>
