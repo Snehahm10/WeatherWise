@@ -149,7 +149,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
       {/* Grid for extra details */}
       <div className="grid grid-cols-2 gap-4">
         {weatherDetails.map((detail, index) => (
-          <Card key={index} className="bg-card/80 backdrop-blur-sm border-border/50 shadow-lg">
+          <Card key={index} className="bg-card/80 backdrop-blur-sm border-border/50 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-2">
                 <detail.icon className="h-5 w-5 text-muted-foreground" />
