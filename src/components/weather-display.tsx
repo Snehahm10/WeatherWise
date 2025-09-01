@@ -44,22 +44,27 @@ const getCardClasses = (condition: string | null) => {
   const lower = condition?.toLowerCase() || '';
 
   if (lower.includes('clear') || lower.includes('sunny')) {
-    return 'from-yellow-200 via-orange-300 to-orange-400 text-orange-900';
+    // Sunny → soft lavender-pink
+    return 'from-violet-200 via-purple-300 to-pink-300 text-purple-900';
   }
 
   if (lower.includes('rain') || lower.includes('drizzle')) {
-    return 'from-indigo-200 via-indigo-300 to-purple-300 text-indigo-900';
+    // Rainy → indigo & blue mix
+    return 'from-indigo-200 via-indigo-300 to-blue-400 text-indigo-900';
   }
 
   if (lower.includes('snow') || lower.includes('winter')) {
-    return 'from-sky-200 via-sky-300 to-blue-400 text-sky-900';
+    // Winter → icy blue
+    return 'from-sky-200 via-sky-300 to-cyan-300 text-sky-900';
   }
 
   if (lower.includes('cloud')) {
-    return 'from-gray-200 via-gray-300 to-gray-400 text-gray-900';
+    // Cloudy → soft gray with subtle violet
+    return 'from-gray-200 via-gray-300 to-violet-200 text-gray-900';
   }
 
-  return 'from-yellow-200 via-orange-300 to-orange-400 text-orange-900';
+  // Default → sunny fallback
+  return 'from-violet-200 via-purple-300 to-pink-300 text-purple-900';
 };
 
 
