@@ -4,17 +4,21 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { Logo } from '@/components/logo';
 
 export default function Home() {
   return (
     <main 
-      className="flex min-h-screen w-full flex-col items-center justify-center p-4 text-center"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 text-center"
     >
+        <div className="absolute top-4 right-4 sm:top-8 sm:right-8">
+            <Logo />
+        </div>
       <div className="max-w-2xl">
         <h1 className="text-2xl font-bold tracking-tighter text-foreground sm:text-3xl md:text-4xl font-headline">
           Global Weather at Your Fingertips
         </h1>
-        <p className="mx-auto mt-6 max-w-[700px] text-lg text-foreground md:text-xl">
+        <p className="mx-auto mt-6 max-w-[700px] text-lg text-foreground/80 md:text-xl">
           Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
         </p>
         <div className="mt-8">
