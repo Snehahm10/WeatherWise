@@ -136,7 +136,7 @@ export default function Home() {
             placeholder="E.g., Davangere, London, Tokyo"
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
-            onFocus={() => cityInput.length > 2 && fetchSuggestions(cityInput)}
+            onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             className="flex-1"
             autoComplete="off"
