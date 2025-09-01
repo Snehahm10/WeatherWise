@@ -67,7 +67,7 @@ export default function Home() {
     setWeatherData(null);
     setSuggestions([]);
     setShowSuggestions(false);
-    setCityInput(selectedCity);
+    setCityInput(''); // Clear the input
 
     try {
       const response = await fetch('/api/weather', {
