@@ -18,7 +18,7 @@ export default function Home() {
             
             <Logo />
 
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-8 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 font-headline">
+            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 font-headline">
               Global Weather at Your Fingertips
             </h1>
             <p className="text-lg lg:text-xl text-foreground/80 my-8">
@@ -32,7 +32,7 @@ export default function Home() {
           </div>
 
           {/* Image Content */}
-          <div className="relative w-full max-w-lg h-80 lg:h-96 mt-8 lg:mt-0">
+          <div className="relative w-full max-w-lg h-80 lg:h-96 mt-12 lg:mt-0">
               <Image
                   src="https://picsum.photos/800/600"
                   alt="Weather App Screenshot"
