@@ -152,12 +152,12 @@ export default function WeatherLayout({
     <main 
       className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8"
       style={{
-        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.8), rgba(173, 216, 230, 0.7)), url('https://picsum.photos/seed/sky/1200/800')",
+        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.8), rgba(173, 216, 230, 0.7)), url('https://picsum.photos/seed/mountain-snow/1200/800')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
       }}
-      data-ai-hint="sky"
+      data-ai-hint="mountain snow"
     >
       <div className="w-full max-w-md space-y-6">
         <div className="relative flex flex-col items-center justify-center gap-2 text-center">
