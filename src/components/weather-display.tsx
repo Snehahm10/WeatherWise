@@ -34,6 +34,8 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
   const [isAiLoading, setIsAiLoading] = useState(true);
 
   useEffect(() => {
+    if (!data.condition) return;
+  
     const fetchAIData = async () => {
       setIsAiLoading(true);
       try {
@@ -52,20 +54,20 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
           setAiData(result.data);
         } else {
           console.error("AI data fetch failed:", result.error);
+          // Fallback to non-AI data if the call fails
           setAiData({ description: data.condition, icon: data.condition });
         }
       } catch (err) {
         console.error("Unexpected error:", err);
+        // Fallback to non-AI data on network error
         setAiData({ description: data.condition, icon: data.condition });
       } finally {
         setIsAiLoading(false);
       }
     };
   
-    if (data.condition) {
-      fetchAIData();
-    }
-  }, [data]);
+    fetchAIData();
+  }, [data.condition]);
 
   return (
     <Card className="mt-6 w-full max-w-md animate-in fade-in-0 duration-500">
