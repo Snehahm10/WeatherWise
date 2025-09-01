@@ -47,13 +47,7 @@ const displayWeatherConditionFlow = ai.defineFlow(
     outputSchema: DisplayWeatherConditionOutputSchema,
   },
   async input => {
-    const {output} = await ai.generate({
-      model: googleAI.model('gemini-1.5-pro'),
-      prompt: {
-        ...prompt,
-        input,
-      },
-    });
+    const {output} = await prompt(input);
     return output!;
   }
 );
