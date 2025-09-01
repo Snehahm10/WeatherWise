@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { WeatherDisplay } from '@/components/weather-display';
 import { Loader2, Search, CloudSun } from 'lucide-react';
@@ -29,26 +30,26 @@ interface Suggestion {
   fullName: string;
 }
 
-const getBackgroundClass = (condition: string | null) => {
+const getBackgroundImage = (condition: string | null): { src: string; hint: string } => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
   if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'bg-gradient-to-br from-blue-400 to-cyan-300';
+    return { src: 'https://picsum.photos/1200/800', hint: 'sunny sky' };
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'bg-gradient-to-br from-blue-700 to-gray-600';
+    return { src: 'https://picsum.photos/1200/800', hint: 'rainy day' };
   }
   if (lowerCaseCondition.includes('snow')) {
-    return 'bg-gradient-to-br from-indigo-400 to-purple-600';
+    return { src: 'https://picsum.photos/1200/800', hint: 'snowy landscape' };
   }
   if (lowerCaseCondition.includes('cloud')) {
-    return 'bg-gradient-to-br from-gray-600 to-gray-800';
+    return { src: 'https://picsum.photos/1200/800', hint: 'cloudy sky' };
   }
   if (lowerCaseCondition.includes('storm') || lowerCaseCondition.includes('thunder')) {
-    return 'bg-gradient-to-br from-gray-800 to-gray-900';
+    return { src: 'https://picsum.photos/1200/800', hint: 'thunder storm' };
   }
   
-  return 'bg-gradient-to-br from-gray-700 to-gray-900';
+  return { src: 'https://picsum.photos/1200/800', hint: 'weather' };
 };
 
 
@@ -60,7 +61,7 @@ export default function Home() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { toast } = useToast();
 
-  const backgroundClass = useMemo(() => getBackgroundClass(weatherData?.condition || null), [weatherData?.condition]);
+  const backgroundImage = useMemo(() => getBackgroundImage(weatherData?.condition || null), [weatherData?.condition]);
 
   const subtitles = useMemo(() => ["Check the weather 🌦️", "Plan your day 🗓️", "Stay prepared ☂️"], []);
   const [subtitleIndex, setSubtitleIndex] = useState(0);
@@ -160,7 +161,17 @@ export default function Home() {
   }, [cityInput, fetchSuggestions, weatherData?.city]);
 
   return (
-    <main className={cn("flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000", backgroundClass)}>
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000">
+      <Image 
+        src={backgroundImage.src}
+        alt="Background image representing the current weather"
+        data-ai-hint={backgroundImage.hint}
+        fill
+        className="object-cover -z-10 transition-opacity duration-1000"
+        quality={80}
+      />
+      <div className="absolute inset-0 bg-black/30 -z-10" />
+
       <div className="w-full max-w-md space-y-6 text-center">
         <div className="flex flex-col items-center justify-center gap-2">
             <div className='flex items-center gap-3'>
