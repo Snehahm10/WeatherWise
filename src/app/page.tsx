@@ -165,14 +165,13 @@ export default function Home() {
     <main className={cn("flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000", backgroundClass)}>
       <div className="w-full max-w-md space-y-6 text-center">
         <div className="flex flex-col items-center justify-center gap-2">
-            <p className="text-lg text-white/90 drop-shadow-lg">Welcome to</p>
             <div className='flex items-center gap-3'>
               <CloudSun className="h-12 w-12 text-white drop-shadow-lg" />
               <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl font-headline">
                   Weather Wise
               </h1>
             </div>
-            <p className="text-md text-white/70 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
+            <p className="text-md text-white/90 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
