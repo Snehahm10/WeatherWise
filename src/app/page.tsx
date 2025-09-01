@@ -101,7 +101,9 @@ export default function Home() {
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      fetchSuggestions(city);
+      if (city) {
+        fetchSuggestions(city);
+      }
     }, 300);
 
     return () => clearTimeout(debounceTimer);
@@ -129,6 +131,7 @@ export default function Home() {
             onFocus={() => city.length > 2 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
             className="flex-1"
+            autoComplete="off"
           />
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Loader2 className="animate-spin" /> : <Search />}
