@@ -2,10 +2,9 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { WeatherDisplay } from '@/components/weather-display';
-import { Loader2, Search, CloudSun } from 'lucide-react';
+import { Loader2, Search } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -30,29 +29,6 @@ interface Suggestion {
   fullName: string;
 }
 
-const getBackgroundImage = (condition: string | null): { src: string; hint: string } => {
-  const lowerCaseCondition = condition?.toLowerCase() || '';
-
-  if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return { src: 'https://picsum.photos/1200/800', hint: 'sunny sky' };
-  }
-  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return { src: 'https://picsum.photos/1200/800', hint: 'rainy day' };
-  }
-  if (lowerCaseCondition.includes('snow')) {
-    return { src: 'https://picsum.photos/1200/800', hint: 'snowy landscape' };
-  }
-  if (lowerCaseCondition.includes('cloud')) {
-    return { src: 'https://picsum.photos/1200/800', hint: 'cloudy sky' };
-  }
-  if (lowerCaseCondition.includes('storm') || lowerCaseCondition.includes('thunder')) {
-    return { src: 'https://picsum.photos/1200/800', hint: 'thunder storm' };
-  }
-  
-  return { src: 'https://picsum.photos/1200/800', hint: 'weather' };
-};
-
-
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -60,19 +36,6 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { toast } = useToast();
-
-  const backgroundImage = useMemo(() => getBackgroundImage(weatherData?.condition || null), [weatherData?.condition]);
-
-  const subtitles = useMemo(() => ["Check the weather 🌦️", "Plan your day 🗓️", "Stay prepared ☂️"], []);
-  const [subtitleIndex, setSubtitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSubtitleIndex((prevIndex) => (prevIndex + 1) % subtitles.length);
-    }, 3000); // Change subtitle every 3 seconds
-
-    return () => clearInterval(interval);
-  }, [subtitles.length]);
 
   const handleFetchWeather = async (selectedCity: string) => {
     if (!selectedCity) {
@@ -161,70 +124,75 @@ export default function Home() {
   }, [cityInput, fetchSuggestions, weatherData?.city]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000">
-      <Image 
-        src={backgroundImage.src}
-        alt="Background image representing the current weather"
-        data-ai-hint={backgroundImage.hint}
-        fill
-        className="object-cover -z-10 transition-opacity duration-1000"
-        quality={80}
-      />
-      <div className="absolute inset-0 bg-black/30 -z-10" />
-
-      <div className="w-full max-w-md space-y-6 text-center">
-        <div className="flex flex-col items-center justify-center gap-2">
-            <div className='flex items-center gap-3'>
-              <CloudSun className="h-12 w-12 text-white drop-shadow-lg" />
-              <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl font-headline">
-                  Weather Wise
-              </h1>
-            </div>
-            <p className="text-md text-white drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
-          <Input 
-            type="text"
-            placeholder="E.g., Davangere, London, Tokyo"
-            value={cityInput}
-            onChange={(e) => setCityInput(e.target.value)}
-            onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
-            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="flex-1 bg-black/20 text-white placeholder:text-gray-300 border-white/30 focus:border-white focus:ring-white backdrop-blur-md"
-            autoComplete="off"
-          />
-          <Button type="submit" disabled={isLoading} className='bg-white/20 text-white hover:bg-white/30 border-white/30 backdrop-blur-md'>
-            {isLoading ? <Loader2 className="animate-spin" /> : <Search />}
-            <span className="sr-only">Get Weather</span>
-          </Button>
-          {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full mt-2 w-full rounded-md border border-white/20 bg-black/20 backdrop-blur-md shadow-lg z-10 overflow-hidden">
-              <ul className="py-1 max-h-60">
-                {suggestions.map((suggestion, index) => (
-                  <li 
-                    key={index} 
-                    className="px-3 py-2 text-left text-sm text-white hover:bg-white/10 cursor-pointer"
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      handleFetchWeather(suggestion.name)
-                    }}
-                  >
-                    {suggestion.fullName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </form>
-
-        {isLoading && (
-            <div className="mt-6 w-full max-w-md">
-                 <Skeleton className="h-[460px] w-full rounded-lg bg-white/10" />
-            </div>
+    <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-br from-[#2E2257] via-[#241B49] to-[#392E66]">
+      <div className="w-full max-w-md space-y-8 text-center">
+        {!weatherData && !isLoading && (
+           <div className="flex flex-col items-center justify-center gap-4 animate-in fade-in-0 duration-500">
+             <div className="w-40 h-40">
+                <img src="https://firebasestorage.googleapis.com/v0/b/stedi-web-devex.appspot.com/o/1d18ea67-a2e6-4927-b50e-a50352778553.png?alt=media&token=59a8dfcb-50e5-4723-a551-789a42426462" alt="Weather illustration" />
+             </div>
+             <h1 className="text-5xl font-bold tracking-tighter text-white">
+               Weather
+               <span className="ml-2 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                 Forecasts
+               </span>
+             </h1>
+             <p className="text-lg text-foreground/80">
+                Get the latest weather updates for your city.
+             </p>
+           </div>
         )}
 
-        {weatherData && !isLoading && <WeatherDisplay data={weatherData} />}
+        <div className='space-y-6'>
+          <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
+            <Input 
+              type="text"
+              placeholder="E.g., Davangere, London, Tokyo"
+              value={cityInput}
+              onChange={(e) => setCityInput(e.target.value)}
+              onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              className="flex-1 bg-card text-foreground placeholder:text-muted-foreground border-border focus:border-primary focus:ring-primary"
+              autoComplete="off"
+            />
+            <Button type="submit" disabled={isLoading} variant="default" size="default" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              {isLoading ? <Loader2 className="animate-spin" /> : <Search />}
+              <span className="sr-only">Get Weather</span>
+            </Button>
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-full mt-2 w-full rounded-md border border-border bg-card shadow-lg z-10 overflow-hidden">
+                <ul className="py-1 max-h-60">
+                  {suggestions.map((suggestion, index) => (
+                    <li 
+                      key={index} 
+                      className="px-3 py-2 text-left text-sm text-foreground hover:bg-secondary cursor-pointer"
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        handleFetchWeather(suggestion.name)
+                      }}
+                    >
+                      {suggestion.fullName}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </form>
+
+          {isLoading && (
+              <div className="mt-6 w-full max-w-md space-y-4">
+                  <Skeleton className="h-40 w-full rounded-lg bg-card" />
+                   <div className="grid grid-cols-2 gap-4">
+                      <Skeleton className="h-24 w-full rounded-lg bg-card" />
+                      <Skeleton className="h-24 w-full rounded-lg bg-card" />
+                      <Skeleton className="h-24 w-full rounded-lg bg-card" />
+                      <Skeleton className="h-24 w-full rounded-lg bg-card" />
+                   </div>
+              </div>
+          )}
+
+          {weatherData && !isLoading && <WeatherDisplay data={weatherData} />}
+        </div>
       </div>
     </main>
   );
