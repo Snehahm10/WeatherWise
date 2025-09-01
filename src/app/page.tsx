@@ -9,7 +9,7 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full flex-col p-4 sm:p-8 text-foreground" style={{
-      backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5)), url('https://picsum.photos/seed/clouds/1200/800')",
+      backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5)), url('https://picsum.photos/seed/sky/1200/800')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }}>
