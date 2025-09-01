@@ -4,7 +4,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { WeatherIcon } from './weather-icon';
 import { Skeleton } from './ui/skeleton';
-import { Sunrise, Sunset, Wind, Thermometer } from 'lucide-react';
+import { Sunrise, Sunset, Wind, Thermometer, Droplets } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface WeatherData {
@@ -44,15 +44,15 @@ const getCardClasses = (condition: string | null) => {
   const lower = condition?.toLowerCase() || '';
 
   if (lower.includes('clear') || lower.includes('sunny')) {
-    return 'from-amber-100 via-orange-100 to-yellow-100 text-orange-700';
+    return 'from-yellow-100 via-yellow-50 to-yellow-100 text-yellow-700';
   }
 
   if (lower.includes('rain') || lower.includes('drizzle')) {
-    return 'from-blue-100 via-sky-100 to-cyan-100 text-blue-700';
+    return 'from-sky-100 via-blue-50 to-sky-100 text-blue-700';
   }
 
   if (lower.includes('snow') || lower.includes('winter')) {
-    return 'from-indigo-100 via-sky-100 to-blue-100 text-indigo-700';
+    return 'from-gray-100 via-slate-50 to-gray-100 text-gray-700';
   }
 
   if (lower.includes('cloud')) {
@@ -149,12 +149,20 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
             </div>
           </div>
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
+            <Droplets className="h-6 w-6 opacity-80" />
+            <div>
+              <p className="text-sm opacity-80">Humidity</p>
+              <p className="text-xl font-semibold">{data.humidity}%</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Wind className="h-6 w-6 opacity-80" />
             <div>
               <p className="text-sm opacity-80">Wind</p>
               <p className="text-xl font-semibold">{data.windSpeed} m/s</p>
             </div>
           </div>
+          
           <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Sunrise className="h-6 w-6 opacity-80" />
             <div>
