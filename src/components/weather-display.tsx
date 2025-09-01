@@ -44,19 +44,19 @@ const getCardClasses = (condition: string | null) => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
   if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'from-orange-400/80 to-orange-600/80 text-orange-50';
+    return 'from-orange-200 via-orange-300 to-orange-400 text-orange-900';
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'from-blue-400/80 to-blue-600/80 text-blue-50';
+    return 'from-blue-200 via-blue-300 to-blue-500 text-blue-900';
   }
   if (lowerCaseCondition.includes('snow')) {
-    return 'from-purple-400/80 to-purple-600/80 text-purple-50';
+    return 'from-purple-200 via-purple-300 to-purple-400 text-purple-900';
   }
   if (lowerCaseCondition.includes('cloud')) {
-    return 'from-gray-500/80 to-gray-700/80 text-gray-50';
+    return 'from-gray-400 via-gray-500 to-gray-600 text-gray-900';
   }
   
-  return 'bg-black/10 text-white'; // Default
+  return 'from-purple-200 via-purple-300 to-indigo-300 text-purple-900';
 };
 
 
@@ -111,7 +111,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         <div className="text-center">
             <h2 className="text-4xl font-bold tracking-tight capitalize font-headline">{`${data.city}, ${data.country}`}</h2>
             {isAiLoading ? (
-                <Skeleton className="h-5 w-48 mt-2 mx-auto bg-white/20" />
+                <Skeleton className="h-5 w-48 mt-2 mx-auto bg-black/20" />
             ) : (
                 <p className="text-lg opacity-80">{aiData?.description}</p>
             )}
@@ -120,7 +120,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         {/* Main Temp */}
         <div className="flex items-center justify-center space-x-6">
           {isAiLoading ? (
-            <Skeleton className="h-28 w-28 rounded-full bg-white/20" />
+            <Skeleton className="h-28 w-28 rounded-full bg-black/20" />
           ) : (
             <WeatherIcon iconName={aiData?.icon || data.condition} className="h-28 w-28 drop-shadow-lg" />
           )}
@@ -131,29 +131,29 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         </div>
         
         {/* Extra Details Grid */}
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/20 text-left">
-          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
+        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-black/10 text-left">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Thermometer className="h-6 w-6 opacity-80" />
             <div>
               <p className="text-sm opacity-80">Feels Like</p>
               <p className="text-xl font-semibold">{data.feelsLike}&deg;C</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Wind className="h-6 w-6 opacity-80" />
             <div>
               <p className="text-sm opacity-80">Wind</p>
               <p className="text-xl font-semibold">{data.windSpeed} m/s</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Sunrise className="h-6 w-6 opacity-80" />
             <div>
               <p className="text-sm opacity-80">Sunrise</p>
               <p className="text-xl font-semibold">{formatTime(data.sunrise)}</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-black/10">
             <Sunset className="h-6 w-6 opacity-80" />
             <div>
               <p className="text-sm opacity-80">Sunset</p>
