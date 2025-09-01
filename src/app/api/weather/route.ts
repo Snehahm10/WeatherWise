@@ -18,7 +18,9 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error(error);
     if (error instanceof Error) {
-        if (error.message.includes('404')) {
+        // Error from OpenWeather API for "city not found" is a 404, but the tool throws an error.
+        // We'll check the message for '404' or 'not found' keywords.
+        if (error.message.includes('404') || error.message.toLowerCase().includes('city not found')) {
             const city = (await req.clone().json()).city;
             return NextResponse.json({
                 success: false,
