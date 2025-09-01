@@ -13,10 +13,10 @@ export default function Home() {
     >
       {/* Top Left Content */}
       <div className="absolute top-4 left-4 sm:top-8 sm:left-8 text-left max-w-xl z-10">
-        <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-slate-100 drop-shadow-md font-headline">
+        <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-foreground font-headline">
           Global Weather at Your Fingertips
         </h1>
-        <p className="text-lg lg:text-xl text-slate-100 my-8 drop-shadow-md">
+        <p className="text-lg lg:text-xl text-foreground/90 my-8">
           Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
         </p>
         <Link href="/today">
