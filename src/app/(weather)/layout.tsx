@@ -152,7 +152,7 @@ export default function WeatherLayout({
     <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8">
       <div className="w-full max-w-md space-y-6">
         <div className="relative flex flex-col items-center justify-center gap-2 text-center">
-            <Link href="/" className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors text-muted-foreground hover:bg-secondary/50">
+            <Link href="/" className="absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors text-muted-foreground hover:bg-secondary/50">
               <Home className="h-6 w-6" />
             </Link>
             <h1 className="text-3xl font-bold tracking-tighter text-foreground">
@@ -171,7 +171,7 @@ export default function WeatherLayout({
             onChange={(e) => setCityInput(e.target.value)}
             onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="flex-1 bg-card text-foreground placeholder:text-muted-foreground border-border focus:border-primary focus:ring-primary"
+            className="flex-1 bg-card/80 backdrop-blur-sm text-foreground placeholder:text-muted-foreground border-border/50 focus:border-primary focus:ring-primary"
             autoComplete="off"
           />
           <Button type="submit" disabled={isLoading} variant="default" size="default" className="bg-primary text-primary-foreground hover:bg-primary/90">

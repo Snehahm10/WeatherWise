@@ -8,11 +8,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full flex-col p-4 sm:p-8 text-foreground" style={{
-      backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5)), url('https://picsum.photos/seed/sky/1200/800')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}>
+    <main className="relative min-h-screen w-full flex-col p-4 sm:p-8 text-foreground">
       <div className="flex flex-col items-center justify-center h-full text-center">
         <div className="container mx-auto flex flex-col items-center justify-between gap-12 text-center">
           {/* Text Content */}
