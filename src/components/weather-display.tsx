@@ -93,7 +93,12 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         if (result.success) {
           setAiData(result.data);
         } else {
-          console.error("AI data fetch failed:", result.error);
+          // Gracefully handle rate-limiting by warning instead of erroring
+          if (typeof result.error === 'string' && result.error.includes('429')) {
+            console.warn("AI data fetch failed (Rate Limit Exceeded):", result.error);
+          } else {
+            console.error("AI data fetch failed:", result.error);
+          }
           setAiData({ description: data.condition, icon: data.condition });
         }
       } catch (err) {
