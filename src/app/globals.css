@@ -81,7 +81,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5)), url('https://picsum.photos/seed/clouds-only-2/1200/800');
+    background-image: linear-gradient(rgba(135, 206, 250, 0.7), rgba(173, 216, 230, 0.5)), url('https://picsum.photos/seed/nature-bushes/1200/800');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
