@@ -9,19 +9,21 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <main 
-      className="relative min-h-screen w-full flex-col p-4 sm:p-8 text-foreground bg-cover bg-center"
+      className="relative min-h-screen w-full flex flex-col p-4 sm:p-8 text-foreground"
     >
-      <div className="flex flex-col items-center justify-center h-full text-center">
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8">
+        <Logo />
+      </div>
+      
+      <div className="flex-1 flex flex-col items-center justify-center text-center">
         <div className="container mx-auto flex flex-col items-center justify-between gap-12 text-center">
           {/* Text Content */}
           <div className="flex flex-col items-center max-w-xl z-10">
-            
-            <Logo />
 
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground font-headline">
+            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-foreground font-headline">
               Global Weather at Your Fingertips
             </h1>
-            <p className="text-lg lg:text-xl text-foreground/80 my-8">
+            <p className="text-lg lg:text-xl text-foreground/90 my-8">
               Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
             </p>
             <Link href="/today">
