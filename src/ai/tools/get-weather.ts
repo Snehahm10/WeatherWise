@@ -32,7 +32,7 @@ export const getWeatherTool = ai.defineTool(
     try {
         const apiKey = process.env.OPENWEATHER_API_KEY;
         if (!apiKey) {
-            throw new Error('OPENWEATHER_API_KEY is not set in the environment variables.');
+            throw new Error('The OPENWEATHER_API_KEY is not set in the environment variables. Please add it to your hosting provider configuration.');
         }
 
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${input.city}&appid=${apiKey}&units=metric`;
