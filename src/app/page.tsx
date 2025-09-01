@@ -11,7 +11,7 @@ export default function Home() {
       className="flex min-h-screen w-full flex-col items-center justify-center p-4 text-center"
     >
       <div className="max-w-2xl">
-        <h1 className="text-3xl font-bold tracking-tighter text-foreground sm:text-4xl md:text-5xl font-headline">
+        <h1 className="text-2xl font-bold tracking-tighter text-foreground sm:text-3xl md:text-4xl font-headline">
           Global Weather at Your Fingertips
         </h1>
         <p className="mx-auto mt-6 max-w-[700px] text-lg text-foreground md:text-xl">
