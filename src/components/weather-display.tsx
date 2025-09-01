@@ -44,8 +44,8 @@ const getCardClasses = (condition: string | null) => {
   const lower = condition?.toLowerCase() || '';
 
   if (lower.includes('clear') || lower.includes('sunny')) {
-    // Sunny → Light Peach
-    return 'bg-rose-200 bg-opacity-30 text-rose-700';
+    // Sunny → Soft Lavender
+    return 'bg-purple-200 bg-opacity-30 text-purple-700';
   }
 
   if (lower.includes('rain') || lower.includes('drizzle')) {
@@ -54,17 +54,17 @@ const getCardClasses = (condition: string | null) => {
   }
 
   if (lower.includes('snow') || lower.includes('winter')) {
-    // Winter → Light Mint Green
-    return 'bg-green-200 bg-opacity-30 text-green-700';
+    // Winter → Light Mint
+    return 'bg-emerald-200 bg-opacity-30 text-emerald-700';
   }
 
   if (lower.includes('cloud')) {
-    // Cloudy → soft gray
+    // Cloudy → Light Gray
     return 'bg-slate-200 bg-opacity-30 text-slate-700';
   }
 
-  // Default → sunny fallback
-  return 'bg-rose-200 bg-opacity-30 text-rose-700';
+  // Default → Soft Lavender
+  return 'bg-purple-200 bg-opacity-30 text-purple-700';
 };
 
 
