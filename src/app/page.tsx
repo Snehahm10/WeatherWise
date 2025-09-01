@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -29,8 +30,27 @@ interface Suggestion {
 }
 
 const getBackgroundClass = (condition: string | null) => {
-  return 'bg-gradient-to-br from-gray-900 to-cyan-900';
+  const lowerCaseCondition = condition?.toLowerCase() || '';
+
+  if (lowerCaseCondition.includes('clear')) {
+    return 'bg-gradient-to-br from-yellow-400 to-orange-500'; // Sunny
+  }
+  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
+    return 'bg-gradient-to-br from-cyan-400 to-blue-800'; // Rainy
+  }
+  if (lowerCaseCondition.includes('snow')) {
+    return 'bg-gradient-to-br from-blue-100 to-gray-300'; // Snowy
+  }
+  if (lowerCaseCondition.includes('cloud')) {
+    return 'bg-gradient-to-br from-gray-400 to-gray-600'; // Cloudy
+  }
+  if (lowerCaseCondition.includes('storm') || lowerCaseCondition.includes('thunder')) {
+    return 'bg-gradient-to-br from-gray-700 to-gray-900'; // Stormy
+  }
+  
+  return 'bg-gradient-to-br from-gray-900 to-cyan-900'; // Default
 };
+
 
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
@@ -149,7 +169,7 @@ export default function Home() {
                   Weather Wise
               </h1>
             </div>
-            <p className="text-md text-white/100 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
+            <p className="text-md text-white drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
@@ -169,7 +189,7 @@ export default function Home() {
           </Button>
           {showSuggestions && suggestions.length > 0 && (
             <div className="absolute top-full mt-2 w-full rounded-md border border-white/20 bg-black/20 backdrop-blur-md shadow-lg z-10 overflow-hidden">
-              <ul className="py-1 max-h-60 overflow-y-auto">
+              <ul className="py-1 max-h-60">
                 {suggestions.map((suggestion, index) => (
                   <li 
                     key={index} 
