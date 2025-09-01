@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     }
 
     // The weather data is already normalized by the tool
-    const weatherData = await getWeatherTool.run({ city });
+    const weatherData = await getWeatherTool({ city });
 
     return NextResponse.json({
       success: true,
