@@ -44,7 +44,7 @@ const getCardClasses = (condition: string | null) => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
   if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'from-orange-200 via-orange-300 to-orange-400 text-orange-900';
+    return 'from-purple-200 via-purple-300 to-indigo-300 text-purple-900';
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
     return 'from-blue-200 via-blue-300 to-blue-500 text-blue-900';
