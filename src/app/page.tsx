@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold tracking-tighter text-foreground sm:text-3xl md:text-4xl font-headline">
           Global Weather at Your Fingertips
         </h1>
-        <p className="mx-auto mt-6 max-w-[700px] text-lg text-foreground/80 md:text-xl">
+        <p className="mx-auto mt-6 max-w-[700px] text-lg text-foreground/90 md:text-xl">
           Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
         </p>
         <div className="mt-8">
