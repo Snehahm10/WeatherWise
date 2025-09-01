@@ -11,16 +11,14 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-br from-[#0c1445] via-[#1a2e68] to-[#2c3e50] text-white">
-      <div className="absolute top-0 left-0 p-8">
-        <Logo />
-      </div>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
         {/* Text Content */}
         <div className="flex flex-col items-center lg:items-start max-w-xl z-10">
-           <h1 className="text-4xl lg:text-6xl font-bold tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
+           <Logo />
+           <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
             Top Weather & Forecasting
           </h1>
-          <p className="text-lg lg:text-xl text-foreground/80 mb-8">
+          <p className="text-lg lg:text-xl text-foreground/80 my-8">
             Get real-time weather updates, a 5-day forecast, and detailed insights for any city around the world. All in one simple, beautiful interface.
           </p>
           <Link href="/today">
