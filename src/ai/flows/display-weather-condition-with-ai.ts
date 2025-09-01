@@ -47,7 +47,7 @@ const displayWeatherConditionFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await ai.generate({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-pro',
       prompt: {
         ...prompt,
         input,
