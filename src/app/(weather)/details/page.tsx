@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useWeatherStore } from '@/app/(weather)/layout';
+import { useWeatherStore } from '@/store/weather-store';
 import { TemperatureChart } from '@/components/temperature-chart';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

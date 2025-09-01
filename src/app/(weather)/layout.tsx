@@ -217,28 +217,3 @@ export default function WeatherLayout({
     </main>
   );
 }
-
-// Create a Zustand store to share weather state
-import { create } from 'zustand';
-
-interface WeatherState {
-  city: string | null;
-  weatherData: any | null;
-  forecastData: any | null;
-  isLoading: boolean;
-  setCity: (city: string) => void;
-  setWeatherData: (data: any) => void;
-  setForecastData: (data: any) => void;
-  setIsLoading: (loading: boolean) => void;
-}
-
-export const useWeatherStore = create<WeatherState>((set) => ({
-  city: null,
-  weatherData: null,
-  forecastData: null,
-  isLoading: false,
-  setCity: (city) => set({ city }),
-  setWeatherData: (data) => set({ weatherData: data }),
-  setForecastData: (data) => set({ forecastData: data }),
-  setIsLoading: (loading) => set({ isLoading: loading }),
-}));

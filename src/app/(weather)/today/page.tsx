@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useWeatherStore } from '@/app/(weather)/layout';
+import { useWeatherStore } from '@/store/weather-store';
 import { WeatherDisplay } from '@/components/weather-display';
 import { Skeleton } from '@/components/ui/skeleton';
 
