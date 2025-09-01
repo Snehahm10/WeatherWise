@@ -13,6 +13,10 @@ export const WeatherDataSchema = z.object({
   condition: z.string().describe('A brief description of the weather condition (e.g., "Sunny", "Cloudy").'),
   city: z.string().describe('The name of the city.'),
   country: z.string().describe('The country code of the city.'),
+  windSpeed: z.number().describe('The wind speed in meters per second.'),
+  feelsLike: z.number().describe('The "feels like" temperature in Celsius.'),
+  sunrise: z.number().describe('The sunrise time, as a Unix timestamp.'),
+  sunset: z.number().describe('The sunset time, as a Unix timestamp.'),
 });
 
 export const getWeatherTool = ai.defineTool(
@@ -52,6 +56,10 @@ export const getWeatherTool = ai.defineTool(
             condition: data.weather[0].main,
             city: data.name,
             country: data.sys.country,
+            windSpeed: data.wind.speed,
+            feelsLike: Math.round(data.main.feels_like),
+            sunrise: data.sys.sunrise,
+            sunset: data.sys.sunset,
         };
     } catch (error) {
         console.error("Error in getWeatherTool:", error);

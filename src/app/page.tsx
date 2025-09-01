@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { WeatherDisplay } from '@/components/weather-display';
-import { Loader2, CloudSun, Search } from 'lucide-react';
+import { Loader2, Search } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface WeatherData {
   temperature: number;
@@ -14,6 +15,10 @@ interface WeatherData {
   condition: string;
   city: string;
   country: string;
+  windSpeed: number;
+  feelsLike: number;
+  sunrise: number;
+  sunset: number;
 }
 
 interface Suggestion {
@@ -23,6 +28,33 @@ interface Suggestion {
   fullName: string;
 }
 
+const getBackgroundClass = (condition: string | null) => {
+  if (!condition) return 'bg-gray-800'; // Default background
+
+  const lowerCaseCondition = condition.toLowerCase();
+
+  if (lowerCaseCondition.includes('clear')) {
+    return 'bg-gradient-to-br from-blue-400 to-yellow-300';
+  }
+  if (lowerCaseCondition.includes('cloud')) {
+    return 'bg-gradient-to-br from-gray-500 to-blue-400';
+  }
+  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
+    return 'bg-gradient-to-br from-blue-800 to-gray-600';
+  }
+  if (lowerCaseCondition.includes('snow')) {
+    return 'bg-gradient-to-br from-blue-300 to-purple-400';
+  }
+  if (lowerCaseCondition.includes('thunderstorm')) {
+    return 'bg-gradient-to-br from-gray-800 to-purple-900';
+  }
+  if (lowerCaseCondition.includes('mist') || lowerCaseCondition.includes('fog') || lowerCaseCondition.includes('haze')) {
+    return 'bg-gradient-to-br from-gray-400 to-gray-600';
+  }
+  return 'bg-gradient-to-br from-gray-700 to-gray-900';
+};
+
+
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -30,6 +62,8 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { toast } = useToast();
+
+  const backgroundClass = useMemo(() => getBackgroundClass(weatherData?.condition || null), [weatherData?.condition]);
 
   const handleFetchWeather = async (selectedCity: string) => {
     if (!selectedCity) {
@@ -118,17 +152,13 @@ export default function Home() {
   }, [cityInput, fetchSuggestions]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8">
-      <div className="w-full max-w-md space-y-4 text-center">
+    <main className={cn("flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000", backgroundClass)}>
+      <div className="w-full max-w-md space-y-6 text-center">
         <div className="flex items-center justify-center gap-2">
-            <CloudSun className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl font-headline">
+            <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl font-headline">
                 WeatherWise
             </h1>
         </div>
-        <p className="text-muted-foreground">
-          Enter a city to get the latest weather.
-        </p>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
           <Input 
@@ -138,20 +168,20 @@ export default function Home() {
             onChange={(e) => setCityInput(e.target.value)}
             onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="flex-1"
+            className="flex-1 bg-black/20 text-white placeholder:text-gray-300 border-white/30 focus:border-white focus:ring-white"
             autoComplete="off"
           />
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} variant="outline" className='bg-white/20 text-white hover:bg-white/30 border-white/30'>
             {isLoading ? <Loader2 className="animate-spin" /> : <Search />}
             <span className="sr-only">Get Weather</span>
           </Button>
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full mt-2 w-full rounded-md border bg-background shadow-lg z-10">
+            <div className="absolute top-full mt-2 w-full rounded-md border border-white/20 bg-black/20 backdrop-blur-md shadow-lg z-10">
               <ul className="py-1">
                 {suggestions.map((suggestion, index) => (
                   <li 
                     key={index} 
-                    className="px-3 py-2 text-left text-sm text-foreground hover:bg-muted cursor-pointer"
+                    className="px-3 py-2 text-left text-sm text-white hover:bg-white/10 cursor-pointer"
                     onMouseDown={(e) => {
                       e.preventDefault();
                       handleFetchWeather(suggestion.name)
@@ -167,7 +197,7 @@ export default function Home() {
 
         {isLoading && (
             <div className="mt-6 w-full max-w-md">
-                 <Skeleton className="h-[320px] w-full rounded-lg" />
+                 <Skeleton className="h-[460px] w-full rounded-lg bg-white/10" />
             </div>
         )}
 
