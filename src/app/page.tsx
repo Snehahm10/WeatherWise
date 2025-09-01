@@ -9,30 +9,26 @@ import { ArrowRight } from 'lucide-react';
 export default function Home() {
   return (
     <main 
-      className="relative min-h-screen w-full flex flex-col p-4 sm:p-8 text-foreground"
+      className="relative min-h-screen w-full p-4 sm:p-8 text-foreground"
     >
-      <div className="absolute top-4 left-4 sm:top-8 sm:left-8">
-        <Logo />
+      {/* Top Right Content */}
+      <div className="absolute top-4 right-4 sm:top-8 sm:right-8 text-right max-w-xl z-10">
+        <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-slate-100 drop-shadow-md font-headline">
+          Global Weather at Your Fingertips
+        </h1>
+        <p className="text-lg lg:text-xl text-slate-100 my-8 drop-shadow-md">
+          Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
+        </p>
+        <Link href="/today">
+          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full text-lg px-8 py-6 group">
+            Check the Weather <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </Link>
       </div>
-      
-      <div className="flex-1 flex flex-col items-center justify-center text-center">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-12 text-center">
-          {/* Text Content */}
-          <div className="flex flex-col items-center max-w-xl z-10">
 
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mt-12 text-slate-100 drop-shadow-md font-headline">
-              Global Weather at Your Fingertips
-            </h1>
-            <p className="text-lg lg:text-xl text-slate-100 my-8 drop-shadow-md">
-              Stay updated with real-time weather, view a detailed 5-day forecast, and explore in-depth insights for any city worldwide—all in a clean and intuitive interface.
-            </p>
-            <Link href="/today">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full text-lg px-8 py-6 group">
-                Check the Weather <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
+      {/* Bottom Right Logo */}
+      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8">
+        <Logo />
       </div>
     </main>
   );
