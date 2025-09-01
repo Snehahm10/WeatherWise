@@ -41,30 +41,25 @@ const formatTime = (timestamp: number) => {
 }
 
 const getCardClasses = (condition: string | null) => {
-  const lowerCaseCondition = condition?.toLowerCase() || '';
+  const lower = condition?.toLowerCase() || '';
 
-  // Sunny → Light orange & yellow
-  if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
-    return 'from-orange-200 via-yellow-200 to-yellow-300 text-yellow-900';
+  if (lower.includes('clear') || lower.includes('sunny')) {
+    return 'from-yellow-200 via-orange-300 to-orange-400 text-orange-900';
   }
 
-  // Rainy → Lavender purple
-  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'from-purple-200 via-purple-300 to-purple-400 text-purple-900';
+  if (lower.includes('rain') || lower.includes('drizzle')) {
+    return 'from-indigo-200 via-indigo-300 to-purple-300 text-indigo-900';
   }
 
-  // Winter (snow/cold) → Light blue
-  if (lowerCaseCondition.includes('snow')) {
-    return 'from-blue-200 via-blue-300 to-blue-400 text-blue-900';
+  if (lower.includes('snow') || lower.includes('winter')) {
+    return 'from-sky-200 via-sky-300 to-blue-400 text-sky-900';
   }
 
-  // Clouds → keep neutral (soft gray/blue)
-  if (lowerCaseCondition.includes('cloud')) {
-    return 'from-slate-200 via-slate-300 to-slate-400 text-slate-900';
+  if (lower.includes('cloud')) {
+    return 'from-gray-200 via-gray-300 to-gray-400 text-gray-900';
   }
 
-  // Default → Sunny style (fallback)
-  return 'from-orange-200 via-yellow-200 to-yellow-300 text-yellow-900';
+  return 'from-yellow-200 via-orange-300 to-orange-400 text-orange-900';
 };
 
 
