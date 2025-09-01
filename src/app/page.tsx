@@ -29,29 +29,7 @@ interface Suggestion {
 }
 
 const getBackgroundClass = (condition: string | null) => {
-  if (!condition) return 'bg-gradient-to-br from-gray-900 to-blue-900'; // Default background
-
-  const lowerCaseCondition = condition.toLowerCase();
-
-  if (lowerCaseCondition.includes('clear')) {
-    return 'bg-gradient-to-br from-blue-800 to-cyan-400';
-  }
-  if (lowerCaseCondition.includes('cloud')) {
-    return 'bg-gradient-to-br from-gray-700 to-blue-800';
-  }
-  if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'bg-gradient-to-br from-blue-900 to-gray-800';
-  }
-  if (lowerCaseCondition.includes('snow')) {
-    return 'bg-gradient-to-br from-blue-700 to-cyan-500';
-  }
-  if (lowerCaseCondition.includes('thunderstorm')) {
-    return 'bg-gradient-to-br from-gray-900 to-purple-900';
-  }
-  if (lowerCaseCondition.includes('mist') || lowerCaseCondition.includes('fog') || lowerCaseCondition.includes('haze')) {
-    return 'bg-gradient-to-br from-gray-600 to-blue-700';
-  }
-  return 'bg-gradient-to-br from-gray-900 to-blue-900';
+  return 'bg-gradient-to-br from-gray-900 to-cyan-900';
 };
 
 export default function Home() {
@@ -171,7 +149,7 @@ export default function Home() {
                   Weather Wise
               </h1>
             </div>
-            <p className="text-md text-white drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
+            <p className="text-md text-white/100 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
