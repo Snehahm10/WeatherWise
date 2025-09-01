@@ -37,7 +37,7 @@ export default function Home() {
                 alt="Weather App Screenshot"
                 fill
                 className="object-cover rounded-2xl shadow-2xl border-4 border-white/20 transform-gpu transition-transform hover:scale-105"
-                data-ai-hint="weather app interface"
+                data-ai-hint="weather forecast"
             />
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
         </div>
