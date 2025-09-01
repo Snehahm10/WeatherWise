@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Search } from 'lucide-react';
+import { Loader2, Search, Home } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -151,7 +151,10 @@ export default function WeatherLayout({
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8">
       <div className="w-full max-w-md space-y-6">
-        <div className="flex flex-col items-center justify-center gap-2 text-center">
+        <div className="relative flex flex-col items-center justify-center gap-2 text-center">
+            <Link href="/" className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors text-muted-foreground hover:bg-secondary/50">
+              <Home className="h-6 w-6" />
+            </Link>
             <h1 className="text-3xl font-bold tracking-tighter text-foreground">
                 Weather <span className="ml-1 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Forecasts</span>
             </h1>
