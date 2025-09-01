@@ -171,7 +171,7 @@ export default function Home() {
                   Weather Wise
               </h1>
             </div>
-            <p className="text-md text-white/90 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
+            <p className="text-md text-white drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
