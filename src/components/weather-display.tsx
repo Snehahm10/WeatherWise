@@ -44,27 +44,22 @@ const getCardClasses = (condition: string | null) => {
   const lower = condition?.toLowerCase() || '';
 
   if (lower.includes('clear') || lower.includes('sunny')) {
-    // Sunny → Lavender (light)
-    return 'bg-purple-100 bg-opacity-40 text-purple-800';
+    return 'bg-purple-50 bg-opacity-70 text-purple-900 border border-purple-200';
   }
 
   if (lower.includes('rain') || lower.includes('drizzle')) {
-    // Rainy → Sky Blue (light)
-    return 'bg-sky-100 bg-opacity-40 text-sky-800';
+    return 'bg-sky-50 bg-opacity-70 text-sky-900 border border-sky-200';
   }
 
   if (lower.includes('snow') || lower.includes('winter')) {
-    // Winter → Mint Green (light)
-    return 'bg-emerald-100 bg-opacity-40 text-emerald-800';
+    return 'bg-emerald-50 bg-opacity-70 text-emerald-900 border border-emerald-200';
   }
 
   if (lower.includes('cloud')) {
-    // Cloudy → Soft Gray (lighter background, darker text)
-    return 'bg-slate-100 bg-opacity-40 text-slate-800';
+    return 'bg-slate-50 bg-opacity-70 text-slate-900 border border-slate-200';
   }
 
-  // Default → Lavender
-  return 'bg-purple-100 bg-opacity-40 text-purple-800';
+  return 'bg-purple-50 bg-opacity-70 text-purple-900 border border-purple-200';
 };
 
 
@@ -118,7 +113,7 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
   }, [data.condition]);
 
   return (
-    <div className={cn("mt-6 w-full max-w-md animate-in fade-in-0 duration-500 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl", cardClasses)}>
+    <div className={cn("mt-6 w-full max-w-md animate-in fade-in-0 duration-500 backdrop-blur-md rounded-2xl shadow-2xl", cardClasses)}>
       <div className="p-6 md:p-8 flex flex-col space-y-6">
         {/* Header */}
         <div className="text-center">
