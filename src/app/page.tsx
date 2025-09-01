@@ -32,23 +32,23 @@ interface Suggestion {
 const getBackgroundClass = (condition: string | null) => {
   const lowerCaseCondition = condition?.toLowerCase() || '';
 
-  if (lowerCaseCondition.includes('clear')) {
-    return 'bg-gradient-to-br from-yellow-400 to-orange-500'; // Sunny
+  if (lowerCaseCondition.includes('clear') || lowerCaseCondition.includes('sunny')) {
+    return 'bg-gradient-to-br from-orange-200 via-orange-300 to-orange-400';
   }
   if (lowerCaseCondition.includes('rain') || lowerCaseCondition.includes('drizzle')) {
-    return 'bg-gradient-to-br from-cyan-400 to-blue-800'; // Rainy
+    return 'bg-gradient-to-br from-blue-200 via-blue-300 to-blue-500';
   }
   if (lowerCaseCondition.includes('snow')) {
-    return 'bg-gradient-to-br from-blue-100 to-gray-300'; // Snowy
+    return 'bg-gradient-to-br from-purple-200 via-purple-300 to-purple-400';
   }
   if (lowerCaseCondition.includes('cloud')) {
-    return 'bg-gradient-to-br from-gray-400 to-gray-600'; // Cloudy
+    return 'bg-gradient-to-br from-gray-400 to-gray-600';
   }
   if (lowerCaseCondition.includes('storm') || lowerCaseCondition.includes('thunder')) {
-    return 'bg-gradient-to-br from-gray-700 to-gray-900'; // Stormy
+    return 'bg-gradient-to-br from-gray-700 to-gray-900';
   }
   
-  return 'bg-gradient-to-br from-gray-900 to-cyan-900'; // Default
+  return 'bg-gradient-to-br from-gray-500 to-gray-700'; // Default
 };
 
 
