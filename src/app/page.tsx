@@ -147,7 +147,7 @@ export default function Home() {
   }, [cityInput, fetchSuggestions, weatherData?.city]);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8 bg-gradient-to-br from-[#2E2257] via-[#241B49] to-[#392E66]">
+    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8 bg-gradient-to-b from-[#0c1445] to-[#2c3e50]">
       <div className="w-full max-w-md space-y-8">
         <div className="flex flex-col items-center justify-center gap-4 text-center animate-in fade-in-0 duration-500">
           <h1 className="text-5xl font-bold tracking-tighter text-white">
