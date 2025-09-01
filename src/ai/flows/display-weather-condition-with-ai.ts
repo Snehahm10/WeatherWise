@@ -1,3 +1,4 @@
+'use server';
 /**
  * @fileOverview A weather condition display AI agent that picks the appropriate
  * text and icon based on the current time of day.
@@ -29,6 +30,7 @@ const prompt = ai.definePrompt({
   name: 'displayWeatherConditionPrompt',
   input: {schema: DisplayWeatherConditionInputSchema},
   output: {schema: DisplayWeatherConditionOutputSchema},
+  model: 'gemini-1.5-flash-latest',
   prompt: `You are a weather expert who provides concise weather descriptions and icon suggestions based on the current weather condition and time of day.
 
 Weather Condition: {{{weatherCondition}}}
