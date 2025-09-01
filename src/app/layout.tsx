@@ -20,7 +20,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet" />
       </head>
-      <body className={cn("font-body antialiased", "min-h-screen bg-background")}>
+      <body className={cn(
+        "font-body antialiased min-h-screen bg-background",
+        "text-foreground transition-colors duration-300"
+      )}>
         {children}
         <Toaster />
       </body>

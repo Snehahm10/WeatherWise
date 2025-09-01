@@ -149,10 +149,10 @@ export default function WeatherLayout({
   ];
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8 bg-gradient-to-b from-[#0c1445] to-[#2c3e50]">
+    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8">
       <div className="w-full max-w-md space-y-6">
         <div className="flex flex-col items-center justify-center gap-2 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter text-white">
+            <h1 className="text-3xl font-bold tracking-tighter text-foreground">
                 Weather <span className="ml-1 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Forecasts</span>
             </h1>
             <p className="text-lg text-foreground/80 capitalize">
@@ -200,7 +200,7 @@ export default function WeatherLayout({
                     className={cn(
                     'rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                     pathname === href
-                        ? 'bg-primary text-primary-foreground'
+                        ? 'bg-accent text-accent-foreground'
                         : 'text-muted-foreground hover:bg-secondary/50'
                     )}
                 >
