@@ -108,28 +108,28 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
         
         {/* Extra Details Grid */}
         <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/20 text-left">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
             <Thermometer className="h-6 w-6 text-white/80" />
             <div>
               <p className="text-sm text-white/80">Feels Like</p>
               <p className="text-xl font-semibold">{data.feelsLike}&deg;C</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
             <Wind className="h-6 w-6 text-white/80" />
             <div>
               <p className="text-sm text-white/80">Wind</p>
               <p className="text-xl font-semibold">{data.windSpeed} m/s</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
             <Sunrise className="h-6 w-6 text-white/80" />
             <div>
               <p className="text-sm text-white/80">Sunrise</p>
               <p className="text-xl font-semibold">{formatTime(data.sunrise)}</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 p-2 rounded-lg transition-all duration-300 hover:bg-white/10">
             <Sunset className="h-6 w-6 text-white/80" />
             <div>
               <p className="text-sm text-white/80">Sunset</p>
