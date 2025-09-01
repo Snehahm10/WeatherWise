@@ -67,7 +67,7 @@ export default function Home() {
     setWeatherData(null);
     setSuggestions([]);
     setShowSuggestions(false);
-    setCityInput(''); // Clear the input
+    setCityInput(selectedCity);
 
     try {
       const response = await fetch('/api/weather', {
@@ -128,7 +128,7 @@ export default function Home() {
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      if (cityInput) {
+      if (cityInput && cityInput !== weatherData?.city) {
         fetchSuggestions(cityInput);
       } else {
         setSuggestions([]);
@@ -137,7 +137,7 @@ export default function Home() {
     }, 300);
 
     return () => clearTimeout(debounceTimer);
-  }, [cityInput, fetchSuggestions]);
+  }, [cityInput, fetchSuggestions, weatherData?.city]);
 
   return (
     <main className={cn("flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000", backgroundClass)}>
@@ -168,8 +168,8 @@ export default function Home() {
             <span className="sr-only">Get Weather</span>
           </Button>
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full mt-2 w-full rounded-md border border-white/20 bg-black/20 backdrop-blur-md shadow-lg z-10">
-              <ul className="py-1">
+            <div className="absolute top-full mt-2 w-full rounded-md border border-white/20 bg-black/20 backdrop-blur-md shadow-lg z-10 overflow-hidden">
+              <ul className="py-1 max-h-60 overflow-y-auto">
                 {suggestions.map((suggestion, index) => (
                   <li 
                     key={index} 
