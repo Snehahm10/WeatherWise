@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { WeatherDisplay } from '@/components/weather-display';
-import { Loader2, Search } from 'lucide-react';
+import { Loader2, Search, CloudSun } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -54,29 +54,15 @@ const getBackgroundClass = (condition: string | null) => {
   return 'bg-gradient-to-br from-gray-700 to-gray-900';
 };
 
-
-const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning!";
-    if (hour < 18) return "Good Afternoon!";
-    return "Good Evening!";
-}
-
-
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [greeting, setGreeting] = useState('');
   const { toast } = useToast();
 
   const backgroundClass = useMemo(() => getBackgroundClass(weatherData?.condition || null), [weatherData?.condition]);
-  
-  useEffect(() => {
-    setGreeting(getGreeting());
-  }, []);
 
   const handleFetchWeather = async (selectedCity: string) => {
     if (!selectedCity) {
@@ -167,9 +153,10 @@ export default function Home() {
   return (
     <main className={cn("flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 transition-all duration-1000", backgroundClass)}>
       <div className="w-full max-w-md space-y-6 text-center">
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-3">
+            <CloudSun className="h-12 w-12 text-white drop-shadow-lg" />
             <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl font-headline">
-                {greeting}
+                Weather Wise
             </h1>
         </div>
         
