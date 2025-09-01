@@ -144,8 +144,8 @@ export default function WeatherLayout({
 
   const navLinks = [
     { href: '/today', label: 'Today' },
-    { href: '/forecast', label: '5 Days' },
-    { href: '/details', label: 'Details' },
+    { href: '/forecast', label: 'Next 5 Days' },
+    { href: '/details', label: 'Forecast' },
   ];
 
   return (
