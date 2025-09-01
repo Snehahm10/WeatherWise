@@ -55,15 +55,28 @@ const getBackgroundClass = (condition: string | null) => {
 };
 
 
+const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning!";
+    if (hour < 18) return "Good Afternoon!";
+    return "Good Evening!";
+}
+
+
 export default function Home() {
   const [cityInput, setCityInput] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [greeting, setGreeting] = useState('');
   const { toast } = useToast();
 
   const backgroundClass = useMemo(() => getBackgroundClass(weatherData?.condition || null), [weatherData?.condition]);
+  
+  useEffect(() => {
+    setGreeting(getGreeting());
+  }, []);
 
   const handleFetchWeather = async (selectedCity: string) => {
     if (!selectedCity) {
@@ -156,7 +169,7 @@ export default function Home() {
       <div className="w-full max-w-md space-y-6 text-center">
         <div className="flex items-center justify-center gap-2">
             <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl font-headline">
-                WeatherWise
+                {greeting}
             </h1>
         </div>
         
@@ -168,10 +181,10 @@ export default function Home() {
             onChange={(e) => setCityInput(e.target.value)}
             onFocus={() => cityInput.length > 2 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-            className="flex-1 bg-black/20 text-white placeholder:text-gray-300 border-white/30 focus:border-white focus:ring-white"
+            className="flex-1 bg-black/20 text-white placeholder:text-gray-300 border-white/30 focus:border-white focus:ring-white backdrop-blur-md"
             autoComplete="off"
           />
-          <Button type="submit" disabled={isLoading} variant="outline" className='bg-white/20 text-white hover:bg-white/30 border-white/30'>
+          <Button type="submit" disabled={isLoading} className='bg-white/20 text-white hover:bg-white/30 border-white/30 backdrop-blur-md'>
             {isLoading ? <Loader2 className="animate-spin" /> : <Search />}
             <span className="sr-only">Get Weather</span>
           </Button>

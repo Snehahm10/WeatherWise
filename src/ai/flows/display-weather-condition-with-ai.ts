@@ -31,12 +31,12 @@ const prompt = ai.definePrompt({
   name: 'displayWeatherConditionPrompt',
   input: {schema: DisplayWeatherConditionInputSchema},
   output: {schema: DisplayWeatherConditionOutputSchema},
-  prompt: `You are a weather expert who provides concise weather descriptions and icon suggestions based on the current weather condition and time of day.
+  prompt: `You are a weather expert who provides concise and friendly weather descriptions and icon suggestions based on the current weather condition and time of day.
 
 Weather Condition: {{{weatherCondition}}}
 Time of Day: {{{timeOfDay}}}
 
-Provide a short description of the weather condition that is appropriate for the time of day. Also suggest an icon to represent the weather condition, appropriate for the time of day. Do not mention the time of day in the description; the user already knows it.
+Provide a short, engaging description of the weather condition that is appropriate for the time of day. Also suggest an icon to represent the weather condition, appropriate for the time of day. Do not mention the time of day in the description; the user already knows it.
 `,
 });
 
