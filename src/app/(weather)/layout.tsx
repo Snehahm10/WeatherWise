@@ -149,7 +149,15 @@ export default function WeatherLayout({
   ];
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8">
+    <main 
+      className="flex min-h-screen w-full flex-col items-center p-4 sm:p-8"
+      style={{
+        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.8), rgba(173, 216, 230, 0.7)), url('https://picsum.photos/seed/sky-clouds/1200/800')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
       <div className="w-full max-w-md space-y-6">
         <div className="relative flex flex-col items-center justify-center gap-2 text-center">
             <Link href="/" className="absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors text-foreground/80 hover:bg-secondary/50">
