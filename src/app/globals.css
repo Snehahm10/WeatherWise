@@ -81,6 +81,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to bottom, #eff6ff, #dbeafe, #bfdbfe);
+    background-image: linear-gradient(to bottom, #87CEFA, #ADD8E6);
   }
 }
