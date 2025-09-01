@@ -31,11 +31,11 @@ const getTimeOfDay = (): 'morning' | 'afternoon' | 'evening' | 'night' => {
 
 export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
   const [aiData, setAiData] = useState<AIData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isAiLoading, setIsAiLoading] = useState(true);
 
   useEffect(() => {
     const fetchAIData = async () => {
-      setLoading(true);
+      setIsAiLoading(true);
       try {
         const response = await fetch("/api/ai-weather", {
           method: "POST",
@@ -58,7 +58,7 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
         console.error("Unexpected error:", err);
         setAiData({ description: data.condition, icon: data.condition });
       } finally {
-        setLoading(false);
+        setIsAiLoading(false);
       }
     };
   
@@ -71,7 +71,7 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
     <Card className="mt-6 w-full max-w-md animate-in fade-in-0 duration-500">
       <CardHeader className="pb-2">
         <CardTitle className="text-3xl font-bold capitalize font-headline">{city}</CardTitle>
-        {loading ? (
+        {isAiLoading ? (
           <Skeleton className="h-5 w-40 mt-1" />
         ) : (
           <CardDescription className="text-base">{aiData?.description}</CardDescription>
@@ -79,7 +79,7 @@ export function WeatherDisplay({ data, city }: WeatherDisplayProps) {
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-center space-y-6 p-6">
         <div className="flex items-center space-x-6">
-          {loading ? (
+          {isAiLoading ? (
             <Skeleton className="h-24 w-24 rounded-full" />
           ) : (
             <WeatherIcon iconName={aiData?.icon || data.condition} className="h-24 w-24 text-accent" />
