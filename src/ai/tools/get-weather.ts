@@ -46,7 +46,6 @@ export const getWeatherTool = ai.defineTool(
 
         const data = await response.json();
 
-        // Normalize the data here
         return {
             temperature: Math.round(data.main.temp),
             humidity: data.main.humidity,
