@@ -157,7 +157,7 @@ export default function WeatherLayout({
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
       }}
-      data-ai-hint="nature landscape"
+      data-ai-hint="nature calm"
     >
       <div className="w-full max-w-md space-y-6">
         <div className="relative flex flex-col items-center justify-center gap-2 text-center">
