@@ -1,6 +1,6 @@
 'use server';
 
-import { getWeatherFlow } from '@/ai/flows/get-weather-flow';
+import { getWeatherFlow } from '@/ai/flows/get-weather';
 import { displayWeatherCondition } from '@/ai/flows/display-weather-condition-with-ai';
 import type { DisplayWeatherConditionInput, DisplayWeatherConditionOutput } from '@/ai/flows/display-weather-condition-with-ai';
 
