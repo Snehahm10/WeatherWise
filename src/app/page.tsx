@@ -64,6 +64,17 @@ export default function Home() {
 
   const backgroundClass = useMemo(() => getBackgroundClass(weatherData?.condition || null), [weatherData?.condition]);
 
+  const subtitles = useMemo(() => ["Check the weather 🌦️", "Plan your day 🗓️", "Stay prepared ☂️"], []);
+  const [subtitleIndex, setSubtitleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSubtitleIndex((prevIndex) => (prevIndex + 1) % subtitles.length);
+    }, 3000); // Change subtitle every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [subtitles.length]);
+
   const handleFetchWeather = async (selectedCity: string) => {
     if (!selectedCity) {
       toast({
@@ -161,6 +172,7 @@ export default function Home() {
                   Weather Wise
               </h1>
             </div>
+            <p className="text-md text-white/70 drop-shadow-lg transition-opacity duration-500">{subtitles[subtitleIndex]}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="relative flex w-full max-w-md items-center space-x-2">
