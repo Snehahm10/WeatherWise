@@ -1,3 +1,5 @@
+'use server';
+
 /**
  * @fileOverview A weather flow that fetches weather data for a given city.
  *
@@ -7,7 +9,7 @@ import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 import { getWeatherTool, WeatherDataSchema } from '@/ai/tools/get-weather';
 
-const getWeatherFlowFn = ai.defineFlow(
+const getWeatherFlow = ai.defineFlow(
     {
       name: 'getWeatherFlow',
       inputSchema: z.string(),
@@ -20,8 +22,8 @@ const getWeatherFlowFn = ai.defineFlow(
       const { output } = await ai.runTool(getWeatherTool, { city });
       return output!;
     }
-  );
+);
 
-export async function getWeatherFlow(city: string) {
-    return await getWeatherFlowFn(city);
+export async function getWeatherForCityFlow(city: string) {
+    return await getWeatherFlow(city);
 }
