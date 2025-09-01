@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { getWeatherForCity } from '@/app/actions';
 import { WeatherDisplay } from '@/components/weather-display';
 import { Loader2, CloudSun } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -41,15 +40,29 @@ export default function Home() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setWeatherData(null);
-    const result = await getWeatherForCity(values.city);
-    if (result.success) {
-      setWeatherData(result.data);
-      setLastCity(values.city);
-    } else {
+    try {
+      const response = await fetch('/api/weather', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city: values.city }),
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        setWeatherData(result.data);
+        setLastCity(values.city);
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: result.error,
+        });
+      }
+    } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: result.error,
+        description: 'An unexpected error occurred.',
       });
     }
     setIsLoading(false);

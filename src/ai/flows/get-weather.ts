@@ -1,8 +1,3 @@
-/**
- * @fileOverview A weather flow that fetches weather data for a given city.
- *
- * - getWeatherFlow - A function that fetches weather for a given city.
- */
 import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 import { getWeatherTool, WeatherDataSchema } from '@/ai/tools/get-weather';
