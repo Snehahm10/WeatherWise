@@ -10,19 +10,12 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: false, error: "City is required" }, { status: 400 });
     }
 
-    // The raw weather data from the tool
+    // The weather data is already normalized by the tool
     const weatherData = await getWeatherTool.run({ city });
-
-    // Normalize the data shape to what the frontend component expects
-    const normalizedData = {
-      temperature: weatherData.temperature,
-      humidity: weatherData.humidity,
-      condition: weatherData.condition,
-    };
 
     return NextResponse.json({
       success: true,
-      data: normalizedData,
+      data: weatherData,
     });
   } catch (error) {
     console.error(error);
