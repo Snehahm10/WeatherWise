@@ -11,11 +11,12 @@ export default function Home() {
     <main 
       className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 text-center"
       style={{
-        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.95), rgba(173, 216, 230, 0.9)), url('https://picsum.photos/seed/sky-clouds/1200/800')",
+        backgroundImage: "linear-gradient(rgba(135, 206, 250, 0.95), rgba(173, 216, 230, 0.9)), url('https://picsum.photos/seed/nature-calm/1200/800')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
       }}
+      data-ai-hint="nature landscape"
     >
         <div className="absolute top-4 right-4 sm:top-8 sm:right-8">
             <Logo />
