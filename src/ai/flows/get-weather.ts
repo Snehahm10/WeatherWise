@@ -60,7 +60,7 @@ const getWeatherTool = ai.defineTool(
   }
 );
 
-const getWeatherFlow = ai.defineFlow(
+export const getWeather = ai.defineFlow(
   {
     name: 'getWeatherFlow',
     inputSchema: z.string(),
@@ -74,7 +74,3 @@ const getWeatherFlow = ai.defineFlow(
     return output!;
   }
 );
-
-export async function getWeather(city: string): Promise<z.infer<typeof WeatherDataSchema>> {
-    return getWeatherFlow(city);
-}
