@@ -6,6 +6,7 @@ import { TemperatureChart } from '@/components/temperature-chart';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { WeatherIcon } from '@/components/weather-icon';
+import { AlertTriangle } from 'lucide-react';
 
 export default function DetailsPage() {
   const { city, forecastData, isLoading } = useWeatherStore();
@@ -20,7 +21,21 @@ export default function DetailsPage() {
   }
 
   if (!forecastData || !city) {
-    return null;
+    return (
+        <Card className="w-full max-w-md bg-card/80 backdrop-blur-sm border-border/50 shadow-lg">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <AlertTriangle className="h-6 w-6 text-destructive" />
+                    <span>Data Unavailable</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p className="text-muted-foreground">
+                    The detailed forecast data could not be loaded. This often happens if the API key is missing or invalid. Please check your configuration and try again.
+                </p>
+            </CardContent>
+        </Card>
+    );
   }
 
   // Mock data for popular cities
