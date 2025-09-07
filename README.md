@@ -1,4 +1,4 @@
-m# WeatherWise: A Modern Weather Forecast App
+# WeatherWise: A Modern Weather Forecast App
 
 WeatherWise is a beautifully designed, AI-enhanced weather forecasting application built with a modern tech stack. It delivers real-time weather data, detailed 5-day forecasts, and insightful visualizations for any city in the world. Powered by Next.js, Genkit, and the OpenWeatherMap API, this app showcases a seamless blend of server-side rendering, AI-driven content generation, and a responsive, component-based UI.
 
