@@ -126,10 +126,11 @@ export function WeatherDisplay({ data }: WeatherDisplayProps) {
       <Card className="bg-card/80 backdrop-blur-sm border-border/50 shadow-lg">
         <CardContent className="p-6 flex flex-col items-center justify-center text-center">
             <h2 className="text-3xl font-bold tracking-tight capitalize">{`${data.city}, ${data.country}`}</h2>
+            
             {isAiLoading ? (
-                <Skeleton className="h-5 w-48 mt-1 mx-auto bg-muted" />
+              <Skeleton className="h-5 w-48 mt-1 mx-auto bg-muted" />
             ) : (
-                <p className="text-base text-muted-foreground">{aiData?.description}</p>
+              <p className="text-base text-muted-foreground">{aiData?.description}</p>
             )}
 
             <div className="flex items-center justify-center my-6 space-x-4">
